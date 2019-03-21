@@ -16,18 +16,7 @@
 package org.onosproject.fwd;
 
 import com.google.common.collect.ImmutableSet;
-import org.onlab.packet.Ethernet;
-import org.onlab.packet.ICMP;
-import org.onlab.packet.ICMP6;
-import org.onlab.packet.IPv4;
-import org.onlab.packet.IPv6;
-import org.onlab.packet.Ip4Prefix;
-import org.onlab.packet.Ip6Prefix;
-import org.onlab.packet.MacAddress;
-import org.onlab.packet.TCP;
-import org.onlab.packet.TpPort;
-import org.onlab.packet.UDP;
-import org.onlab.packet.VlanId;
+import org.onlab.packet.*;
 import org.onlab.util.KryoNamespace;
 import org.onlab.util.Tools;
 import org.onosproject.cfg.ComponentConfigService;
@@ -713,6 +702,10 @@ public class ReactiveForwarding {
                 }
             }
         }
+
+        // Adding match field without check
+        selectorBuilder.matchMplsLabel(MplsLabel.mplsLabel(1000));
+
         TrafficTreatment treatment = DefaultTrafficTreatment.builder()
                 .setOutput(portNumber)
                 .build();
